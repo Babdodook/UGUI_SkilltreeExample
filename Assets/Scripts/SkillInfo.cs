@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum SkillType
 {
     Battlerage = 0,     // 격투
@@ -13,7 +14,8 @@ public enum SkillType
     Max
 }
 
-public class SkillInfo : MonoBehaviour
+[System.Serializable]
+public class SkillInfo
 {
     [Header("스킬 타입")]
     public SkillType m_type;
