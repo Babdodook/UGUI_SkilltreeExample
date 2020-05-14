@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SkillTreeManager : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
-        
+
     }
 
     void Update()
