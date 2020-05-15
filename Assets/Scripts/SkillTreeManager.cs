@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using System.IO;
+using UnityEngine.EventSystems;
 
 public class SkillTreeManager : MonoBehaviour
 {
+    public Transform[] SelectSkillSet = new Transform[3];
+    public Transform[] SkillSet = new Transform[3];
+
     List<SkillInfo> Battlerage;
     List<SkillInfo> Sorcery;
     List<SkillInfo> Archery;
@@ -15,6 +19,7 @@ public class SkillTreeManager : MonoBehaviour
 
     void Awake()
     {
+
         InitializeSkillList();
 
         Battlerage.Add(new SkillInfo(SkillType.Battlerage, "3단 베기", 12, 4, 0, 0, 1, "빠르게 적을 베어 공격하며 연속으로 사용 시 피해가 증가합니다", false));
@@ -46,7 +51,6 @@ public class SkillTreeManager : MonoBehaviour
 
     void Update()
     {
-        
     }
 
     void SaveData()
@@ -59,6 +63,29 @@ public class SkillTreeManager : MonoBehaviour
     {
         string jdata = File.ReadAllText(Application.dataPath + "/Test.json");
         Battlerage = JsonConvert.DeserializeObject<List<SkillInfo>>(jdata);
+    }
+
+    public void ClickSelectSkillSetButton(Transform transform)
+    {
+        for(int i=0 ; i < SelectSkillSet.Length ; i++)
+        {
+            Transform[] child = SelectSkillSet[i].GetComponentsInChildren<Transform>();
+
+            for(int j = 0 ; j < child.Length ; j++)
+            {
+                if(transform.GetComponentInParent<Transform>() == child[j])
+                {
+                    SelectSkillSet[i].gameObject.SetActive(false);
+                    SkillSet[i].gameObject.SetActive(true);
+                    break;
+                }
+            }
+        }
+
+
+        //Transform clickedButton =  EventSystem.current.currentSelectedGameObject.transform;
+        //print(gameObject.name);
+
     }
 
     // 스킬 리스트 초기화
