@@ -15,7 +15,7 @@ public enum SkillType
 }
 
 [System.Serializable]
-public class SkillInfo
+public class SkillInfo : MonoBehaviour
 {
     [Header("스킬 타입")]
     public SkillType m_type;
@@ -75,6 +75,20 @@ public class SkillInfo
         m_descryption = _descryption;
         m_isUnLocked = _isUnlocked;
         m_isPassive = true;
+    }
+
+    public void SetSkillInfo(SkillInfo info)
+    {
+        m_type = info.m_type;
+        m_name = info.m_name;
+        m_mana = info.m_mana;
+        m_range = info.m_range;
+        m_castTime = info.m_castTime;
+        m_delayTime = info.m_delayTime;
+        m_requiredLevel = info.m_requiredLevel;
+        m_descryption = info.m_descryption;
+        m_isUnLocked = info.m_isUnLocked;
+        m_isPassive = info.m_isPassive;
     }
 }
 
