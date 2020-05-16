@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectSkillSets : MonoBehaviour
+public class ButtonEventManager : MonoBehaviour
 {
+    SkillType type;
 
-    public SkillType type;
-
-    SkillTreeManager manager;
+    SkillTreeManager _SkillTreeManager;
     void Awake()
     {
-        manager = GameObject.Find("SkillTreeManager").GetComponent<SkillTreeManager>();
+        _SkillTreeManager = GameObject.Find("SkillTreeManager").GetComponent<SkillTreeManager>();
 
         switch(this.gameObject.name)
         {
@@ -32,8 +31,18 @@ public class SelectSkillSets : MonoBehaviour
         }
     }
 
-	public void ClickButton()
+	public void SelectSkillSet()
     {
-        manager.ClickSelectSkillSetButton(this.GetComponent<RectTransform>(), type);
+        _SkillTreeManager.ClickSelectSkillSetButton(this.GetComponent<RectTransform>(), type);
+    }
+
+    public void Reset()
+    {
+        _SkillTreeManager.ClickReset(this.GetComponent<RectTransform>());
+    }
+
+    public void ChangeSkillSet()
+    {
+        _SkillTreeManager.ClickChangeSkillSet(this.GetComponent<RectTransform>());
     }
 }

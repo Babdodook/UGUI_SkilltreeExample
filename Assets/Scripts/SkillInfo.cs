@@ -90,5 +90,24 @@ public class SkillInfo : MonoBehaviour
         m_isUnLocked = info.m_isUnLocked;
         m_isPassive = info.m_isPassive;
     }
+
+    public string GetTypeToString()
+    {
+        switch(m_type)
+        {
+            case SkillType.Battlerage:
+                return "격투";
+            case SkillType.Sorcery:
+                return "마법";
+            case SkillType.Archery:
+                return "야성";
+            case SkillType.Shadowplay:
+                return "사명";
+            case SkillType.Witchcraft:
+                return "환술";
+        }
+
+        return null;
+    }
 }
 
