@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3474761337658305062}
   - component: {fileID: 3474761337658305048}
   - component: {fileID: 3474761337658305049}
-  - component: {fileID: 711778334767413992}
+  - component: {fileID: 1488092761373946723}
   - component: {fileID: 3909542468348649900}
   m_Layer: 5
   m_Name: SkillPrototype
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &711778334767413992
+--- !u!114 &1488092761373946723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95edff7aa7448440b4d67b44649cec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_type: 5
+  m_type: 0
   m_name: 
   m_mana: 0
   m_range: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_descryption: 
   m_isUnLocked: 0
   m_isPassive: 0
+  m_specificPoint: 0
+  m_isEnabled: 0
 --- !u!114 &3909542468348649900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366d3b6e5d136ea41b7f61743fb86cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SkillInfo: {fileID: 0}

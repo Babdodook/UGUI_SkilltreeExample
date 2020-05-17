@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using System.IO;
-using UnityEngine.EventSystems;
 
 public class SelectType
 {
@@ -25,34 +23,21 @@ public class SkillTreeManager : MonoBehaviour
     public Text UsedSkillPoint;
     public bool isMaxPoint = false;
 
+    public SkillTabInfo[] SkillTabs = new SkillTabInfo[3];
     public Text[] CurrentSkillPointText = new Text[3];
-
-    // 버튼들
-    public RectTransform[] SelectSkillSet = new RectTransform[3];
-    public RectTransform[] SkillSet = new RectTransform[3];
-    public RectTransform[] Reset = new RectTransform[3];
-    public RectTransform[] ChangeSkillSet = new RectTransform[3];
-
+    
     SelectType[] _selectType = new SelectType[5];
 
     //데이터 세이브&로드용 리스트
-    List<SkillInfo> Battlerage;
-    List<SkillInfo> Sorcery;
-    List<SkillInfo> Archery;
-    List<SkillInfo> Shadowplay;
-    List<SkillInfo> Witchcraft;
+    List<DataSkillInfo> Battlerage;
+    List<DataSkillInfo> Sorcery;
+    List<DataSkillInfo> Archery;
+    List<DataSkillInfo> Shadowplay;
+    List<DataSkillInfo> Witchcraft;
 
     void Awake()
     {
         InitializeSkillList();
-
-        for(int i=0 ; i < SkillSet.Length ; i++)
-        {
-            SelectSkillSet[i].gameObject.SetActive(true);
-            SkillSet[i].gameObject.SetActive(false);
-            Reset[i].gameObject.SetActive(false);
-            ChangeSkillSet[i].gameObject.SetActive(false);
-        }
 
         for(int i = 0 ; i <_selectType.Length ; i++)
         {
@@ -74,17 +59,35 @@ public class SkillTreeManager : MonoBehaviour
     // 스킬 리스트 초기화
     void InitializeSkillList()
     {
-        Battlerage = new List<SkillInfo>();
-        Sorcery = new List<SkillInfo>();
-        Archery = new List<SkillInfo>();
-        Shadowplay = new List<SkillInfo>();
-        Witchcraft = new List<SkillInfo>();
+        Battlerage = new List<DataSkillInfo>();
+        Sorcery = new List<DataSkillInfo>();
+        Archery = new List<DataSkillInfo>();
+        Shadowplay = new List<DataSkillInfo>();
+        Witchcraft = new List<DataSkillInfo>();
     }
 
-    void SaveData()
+    public void SaveData()
     {
-        string jdata = JsonConvert.SerializeObject(Battlerage, Formatting.Indented);
-        File.WriteAllText(Application.dataPath + "/SkillData/BattlerageInfo.json", jdata);
+        for(int i=0 ; i<SkillTabs.Length)
+        {
+            if(SkillTabs[i].SkillSet != null)
+            {
+                
+            }
+        }
+        
+
+        string Battlerage_data = JsonConvert.SerializeObject(Battlerage, Formatting.Indented);
+        string Sorcery_data = JsonConvert.SerializeObject(Sorcery, Formatting.Indented);
+        string Archery_data = JsonConvert.SerializeObject(Archery, Formatting.Indented);
+        string Shadowplay_data = JsonConvert.SerializeObject(Shadowplay, Formatting.Indented);
+        string Witchcraft_data = JsonConvert.SerializeObject(Witchcraft, Formatting.Indented);
+
+        File.WriteAllText(Application.dataPath + "/SkillData/nBattlerageInfo.json", Battlerage_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/nSorceryInfo.json", Sorcery_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/nArcheryInfo.json", Archery_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/nShadowplayInfo.json", Shadowplay_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/nWitchcraftInfo.json", Witchcraft_data);
     }
 
     void LoadData()
@@ -95,16 +98,17 @@ public class SkillTreeManager : MonoBehaviour
         string Shadowplay_data = File.ReadAllText(Application.dataPath + "/SkillData/ShadowplayInfo.json");
         string Witchcraft_data = File.ReadAllText(Application.dataPath + "/SkillData/WitchcraftInfo.json");
 
-        Battlerage = JsonConvert.DeserializeObject<List<SkillInfo>>(Battlerage_data);
-        Sorcery = JsonConvert.DeserializeObject<List<SkillInfo>>(Sorcery_data);
-        Archery = JsonConvert.DeserializeObject<List<SkillInfo>>(Archery_data);
-        Shadowplay = JsonConvert.DeserializeObject<List<SkillInfo>>(Shadowplay_data);
-        Witchcraft = JsonConvert.DeserializeObject<List<SkillInfo>>(Witchcraft_data);
+        Battlerage = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Battlerage_data);
+        Sorcery = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Sorcery_data);
+        Archery = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Archery_data);
+        Shadowplay = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Shadowplay_data);
+        Witchcraft = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Witchcraft_data);
     }
 
     // 어떤 스킬셋 버튼 눌렀는지
     public void ClickSelectSkillSetButton(RectTransform _rectTransform, SkillType type)
     {
+        // 이미 열린 스킬셋은 열지 않기
         for(int i=0 ; i < _selectType.Length ; i++)
         {
             if(_selectType[i].type == type)
@@ -116,144 +120,13 @@ public class SkillTreeManager : MonoBehaviour
             }
         }
 
-        for(int i=0 ; i < SelectSkillSet.Length ; i++)
-        {
-            RectTransform[] child = SelectSkillSet[i].GetComponentsInChildren<RectTransform>();
-            for(int j = 0 ; j < child.Length ; j++)
-            {
-                if(_rectTransform == child[j])
-                {                        
-                    SelectSkillSet[i].gameObject.SetActive(false);
-                    SkillSet[i].gameObject.SetActive(true);
-                    Reset[i].gameObject.SetActive(true);
-                    ChangeSkillSet[i].gameObject.SetActive(true);
-                    InstantiateSkills(type,i);
-                    break;
-                }
-            }
-        }
-    }
-
-    // 리셋 버튼 작동
-    public void ClickReset(RectTransform _rectTransform)
-    {
-        RectTransform _SkillSet = null;
-        List<SkillInfo> SkillDataList = new List<SkillInfo>();
-
-        // 어떤 스킬셋 초기화해야하는지 알아오기
-        for(int i=0 ; i < Reset.Length ; i++)
-        {
-            if(_rectTransform == Reset[i])
-            {
-                _SkillSet = SkillSet[i];
-                break;
-            }
-        }
-
-        // 해당 스킬셋 타입 알아오기
-        switch(_SkillSet.GetComponentInChildren<SkillInfo>().m_type)
-        {
-            case SkillType.Battlerage:
-                SkillDataList = Battlerage;
-                break;
-            case SkillType.Sorcery:
-                SkillDataList = Sorcery;
-                break;
-            case SkillType.Archery:
-                SkillDataList = Archery;
-                break;
-            case SkillType.Shadowplay:
-                SkillDataList = Shadowplay;
-                break;
-            case SkillType.Witchcraft:
-                SkillDataList = Witchcraft;
-                break;
-        }
-
-        // 자식 오브젝트 SkillInfo 초기화하기
-        for(int i=0 ; i< SkillDataList.Count ; i++)
-        {
-            // 색 다시 반투명으로
-            Color _color = _SkillSet.Find(i.ToString()).GetComponent<Image>().color;
-            _color.a = 0.5f;
-            _SkillSet.Find(i.ToString()).GetComponent<Image>().color = _color;
-
-            // 정보 초기화
-            _SkillSet.Find(i.ToString()).GetComponent<SkillInfo>().SetSkillInfo(SkillDataList[i]);
-        }
-    }
-
-    // 스킬셋변경 버튼 작동
-    public void ClickChangeSkillSet(RectTransform _rectTransform)
-    {
-        RectTransform _SkillSet = null;
-        RectTransform _SelectSkillSet = null;
-        List<SkillInfo> SkillDataList = new List<SkillInfo>();
-
-
-        // 어떤 스킬셋 변경해야하는지 알아오기
-        for(int i=0 ; i < ChangeSkillSet.Length ; i++)
-        {
-            if(_rectTransform == ChangeSkillSet[i])
-            {
-                _SkillSet = SkillSet[i];
-                _SelectSkillSet = SelectSkillSet[i];
-                Reset[i].gameObject.SetActive(false);
-                ChangeSkillSet[i].gameObject.SetActive(false);
-                break;
-            }
-        }
-
-        // 해당 스킬셋 타입 알아오기
-        // 어차피 삭제할거라 상관없지만 나중에 스킬타입별로 개수가 달라지면 (현재는 모두 동일)
-        // 스킬타입별로 총 스킬개수가 몇개인지 알아야함
-        switch(_SkillSet.GetComponentInChildren<SkillInfo>().m_type)
-        {
-            case SkillType.Battlerage:
-                SkillDataList = Battlerage;
-                break;
-            case SkillType.Sorcery:
-                SkillDataList = Sorcery;
-                break;
-            case SkillType.Archery:
-                SkillDataList = Archery;
-                break;
-            case SkillType.Shadowplay:
-                SkillDataList = Shadowplay;
-                break;
-            case SkillType.Witchcraft:
-                SkillDataList = Witchcraft;
-                break;
-        }
-
-        for(int i=0 ; i < _selectType.Length ; i++)
-        {
-            if(_SkillSet.GetComponentInChildren<SkillInfo>().m_type == _selectType[i].type)
-            {
-                _selectType[i].isSelected = false;
-            }
-        }
-
-        // 인스턴스한 스킬들 삭제
-        for(int i=0 ; i < SkillDataList.Count ; i++)
-        {
-            Destroy(_SkillSet.Find(i.ToString()).gameObject);
-        }
-
-        // 스킬셋 끄고 스킬 선택창 가져오기
-        _SkillSet.gameObject.SetActive(false);
-        _SelectSkillSet.gameObject.SetActive(true);
-    }
-
-    // 스킬 생성
-    void InstantiateSkills(SkillType type, int index)
-    {
-        int j=0;
-        int pIndex = 0;
-        float yPos = prototypePos.y;
-        List<SkillInfo> SkillDataList = new List<SkillInfo>();
+        List<DataSkillInfo> SkillDataList = new List<DataSkillInfo>();
         Sprite[] ActiveSkills = null;
         Sprite[] PassiveSkills = null;
+
+        // 스킬셋 가져오기
+        SkillTabInfo _SkillTabInfo = _rectTransform.GetComponentInParent<SkillTabInfo>();
+        SkillSetInfo _CurrentSkillSet = _SkillTabInfo.SkillSet;
 
         switch(type)
         {
@@ -284,16 +157,82 @@ public class SkillTreeManager : MonoBehaviour
                 break;
         }
 
+        // 해당 스킬셋에 리스트 할당
+        _CurrentSkillSet.CurrentSkillList = SkillDataList;
+        _CurrentSkillSet.ActiveSkills = ActiveSkills;
+        _CurrentSkillSet.PassiveSkills = PassiveSkills;
+
+        // 스킬셋 넘기기
+        InstantiateSkills(_CurrentSkillSet);
+    }
+
+    // 리셋 버튼 작동
+    public void ClickReset(RectTransform _rectTransform)
+    {
+        SkillSetInfo _CurrentSkillSet = _rectTransform.GetComponentInParent<SkillSetInfo>();
+        List<DataSkillInfo> SkillDataList = _CurrentSkillSet.CurrentSkillList;
+        
+        // 자식 오브젝트 SkillInfo 초기화하기
+        for(int i=0 ; i< SkillDataList.Count ; i++)
+        {
+            // 색 다시 반투명으로
+            Color _color = _CurrentSkillSet.rectTransform.Find(i.ToString()).GetComponent<Image>().color;
+            _color.a = 0.5f;
+            _CurrentSkillSet.rectTransform.Find(i.ToString()).GetComponent<Image>().color = _color;
+
+            // 정보 초기화
+            _CurrentSkillSet.rectTransform.Find(i.ToString()).GetComponent<SkillInfo>().ConvertData(SkillDataList[i]);
+        }
+    }
+
+    // 스킬셋변경 버튼 작동
+    public void ClickChangeSkillSet(RectTransform _rectTransform)
+    {
+        SkillSetInfo _CurrentSkillSet = _rectTransform.GetComponentInParent<SkillSetInfo>();
+
+        for(int i=0 ; i < _selectType.Length ; i++)
+        {
+            if(_CurrentSkillSet.rectTransform.GetComponentInChildren<SkillInfo>().m_type == _selectType[i].type)
+            {
+                _selectType[i].isSelected = false;
+            }
+        }
+
+        // 인스턴스한 스킬들 삭제
+        for(int i=0 ; i < _CurrentSkillSet.Skills.Length ; i++)
+        {
+            Destroy(_CurrentSkillSet.Skills[i].gameObject);
+        }
+
+        _CurrentSkillSet.rectTransform.gameObject.SetActive(false);
+    }
+
+    // 스킬 생성
+    void InstantiateSkills(SkillSetInfo _CurrentSkillSet)
+    {
+        List<DataSkillInfo> SkillDataList = _CurrentSkillSet.CurrentSkillList;
+        Sprite[] ActiveSkills = _CurrentSkillSet.ActiveSkills;
+        Sprite[] PassiveSkills = _CurrentSkillSet.PassiveSkills;
+
+        int j=0;
+        int pIndex = 0;
+        float yPos = prototypePos.y;
+
         // 복제할 오브젝트 끄기
         SkillPrototype.gameObject.SetActive(false);
 
+        _CurrentSkillSet.Skills = null;
+        _CurrentSkillSet.Skills = new RectTransform[SkillDataList.Count];
+        // 스킬 생성
         for(int i=0 ; i< SkillDataList.Count ; i++)
         {
             var skill = GameObject.Instantiate(SkillPrototype) as RectTransform;
-            skill.SetParent(SkillSet[index], false);
+            skill.SetParent(_CurrentSkillSet.rectTransform, false);
             skill.name = i.ToString();
-            skill.GetComponent<SkillInfo>().SetSkillInfo(SkillDataList[i]);
+            skill.GetComponent<SkillInfo>().ConvertData(SkillDataList[i]);
             skill.anchoredPosition = new Vector2(prototypePos.x + (j++ * 110), yPos);
+
+            _CurrentSkillSet.Skills[i] = skill;
 
             // 색 지정
             Color _color = skill.GetComponent<Image>().color;
@@ -319,56 +258,70 @@ public class SkillTreeManager : MonoBehaviour
                 yPos = -100;
             }
         }
+
+        // 스킬셋 켜주기
+        _CurrentSkillSet.rectTransform.gameObject.SetActive(true);
     }
 
     // 스킬포인트 업데이트
     // 스킬포인트에 따라 스킬해금 업데이트
     public void UpdateSkillInfo()
     {
-        SkillInfo[] Skills;
+        RectTransform[] Skills;
+        SkillInfo _skillInfo;
+        int CurrentSkillPoint;
+
         ExPlayer.AvailableSkillPoint = ExPlayer.MaxSkillPoint;
         ExPlayer.MinSkillLevel = 0;
 
-        for(int i=0 ; i < SkillSet.Length ; i++)
+        ExPlayer.UsedSkillPoint = 0;
+
+        for(int i=0 ; i < SkillTabs.Length ; i++)
         {
-            Skills = SkillSet[i].GetComponentsInChildren<SkillInfo>();
-            int CurrentSkillPoint=0;
-
-            for(int j=0 ; j < Skills.Length ; j++)
+            if(SkillTabs[i].SkillSet.gameObject.activeSelf)
             {
-                //액티브 스킬중에서 찍은 스킬 찾기 (패시브 제외)
-                if(!Skills[j].m_isPassive && Skills[j].m_isEnabled)
+                Skills = SkillTabs[i].SkillSet.Skills;
+                CurrentSkillPoint = 0;
+
+                // 액티브 스킬 중에서 활성화된 스킬 카운트 (패시브 제외)
+                for(int j=0; j<Skills.Length ; j++)
                 {
-                    ExPlayer.AvailableSkillPoint--;
-                    CurrentSkillPoint++;
+                    _skillInfo = Skills[j].GetComponent<SkillInfo>();
 
-                    if(Skills[j].m_requiredLevel > ExPlayer.MinSkillLevel)
-                        ExPlayer.MinSkillLevel = Skills[j].m_requiredLevel;
-                }
-            }
-
-            // 특정 조건 만족하는 스킬 해금해주기
-            // 패시브 스킬은 자동으로 활성화 시켜주기
-            for(int z=0 ; z < Skills.Length ; z++)
-            {
-                if( Skills[z].m_specificPoint != 0 
-                    && Skills[z].m_specificPoint <= CurrentSkillPoint )
-                {
-                    Skills[z].m_isUnLocked = true;
-
-                    // 패시브 스킬일 경우 활성화
-                    if(Skills[z].m_isPassive)
+                    if(!_skillInfo.m_isPassive && _skillInfo.m_isEnabled)
                     {
-                        print(Skills[z]);
-                        Color _color = Skills[z].GetComponent<Image>().color;
-                        _color.a = 1;
-                        Skills[z].GetComponent<Image>().color = _color;
-                        Skills[z].m_isEnabled = true;
+                        ExPlayer.AvailableSkillPoint--;
+                        CurrentSkillPoint++;
+
+                        if(_skillInfo.m_requiredLevel > ExPlayer.MinSkillLevel)
+                            ExPlayer.MinSkillLevel = _skillInfo.m_requiredLevel;
                     }
                 }
-            }
 
-            CurrentSkillPointText[i].text = "(" + CurrentSkillPoint + "/12)";
+                // 특정 조건 만족하는 스킬 해금해주기
+                // 패시브 스킬은 자동으로 활성화 시켜주기
+                for(int z=0 ; z < Skills.Length ; z++)
+                {
+                    _skillInfo = Skills[z].GetComponent<SkillInfo>();
+
+                    if( _skillInfo.m_specificPoint != 0 
+                        && _skillInfo.m_specificPoint <= CurrentSkillPoint )
+                    {
+                        _skillInfo.m_isUnLocked = true;
+
+                        // 패시브 스킬일 경우 활성화
+                        if(_skillInfo.m_isPassive)
+                        {
+                            Color _color = Skills[z].GetComponent<Image>().color;
+                            _color.a = 1;
+                            Skills[z].GetComponent<Image>().color = _color;
+                            _skillInfo.m_isEnabled = true;
+                        }
+                    }
+                }
+
+                CurrentSkillPointText[i].text = "(" + CurrentSkillPoint + "/12)";
+            }
         }
 
         ExPlayer.UsedSkillPoint = ExPlayer.MaxSkillPoint - ExPlayer.AvailableSkillPoint;
@@ -383,29 +336,6 @@ public class SkillTreeManager : MonoBehaviour
             isMaxPoint=true;
         else
             isMaxPoint=false;
-    }
-
-    void SetCurrentSkillSetsUnLock(RectTransform _transform)
-    {
-        int CurrentSkillPoint=0;
-
-        SkillInfo[] currentSkillSetInfo = 
-            _transform.GetComponentInParent<RectTransform>().GetComponentsInChildren<SkillInfo>();
-
-        // 해당 기술 스킬포인트 몇 사용하였는지 알아오기
-        for(int i=0 ; i < currentSkillSetInfo.Length ; i++)
-        {
-            if(currentSkillSetInfo[i].m_isEnabled)
-                CurrentSkillPoint++;
-        }
-
-        // 조건만족하는 스킬찾아서 해금해주기
-        for(int i=0 ; i < currentSkillSetInfo.Length ; i++)
-        {
-            if(currentSkillSetInfo[i].m_specificPoint != 0 &&
-            currentSkillSetInfo[i].m_specificPoint >= CurrentSkillPoint)
-                currentSkillSetInfo[i].m_isUnLocked = true;
-        }
     }
 
     public void ClickSkill(SkillInfo _SkillInfo, RectTransform _transform)

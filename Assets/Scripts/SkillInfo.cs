@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public enum SkillType
-{
-    Battlerage = 0,     // 격투
-    Sorcery,            // 마법
-    Archery,            // 야성
-    Shadowplay,         // 사명
-    Witchcraft,         // 환술
-
-    Max
-}
-
-[System.Serializable]
 public class SkillInfo : MonoBehaviour
 {
     [Header("스킬 타입")]
@@ -32,61 +19,8 @@ public class SkillInfo : MonoBehaviour
     [Header("지속 스킬")]   public bool m_isPassive;
     [Header("특정 조건 개방 스킬")] public int m_specificPoint;
     [Header("사용 중인 스킬")]  public bool m_isEnabled;
-    
-    public SkillInfo()
-    {
-        m_type = SkillType.Max;
-        m_name = "";
-        m_range = 0;
-        m_castTime = 0;
-        m_requiredLevel = 0;
-        m_isUnLocked = false;
-    }
 
-    // 액티브 스킬
-    public SkillInfo(   SkillType _type,
-                        string _name,
-                        int _mana,
-                        float _range,
-                        float _castTime,
-                        float _delayTime,
-                        int _requiredLevel,
-                        string _descryption,
-                        bool _isUnlocked,  
-                        int _specificPoint  )
-    {
-        m_type = _type;
-        m_name = _name;
-        m_mana = _mana;
-        m_range = _range;
-        m_castTime = _castTime;
-        m_delayTime = _delayTime;
-        m_requiredLevel = _requiredLevel;
-        m_descryption = _descryption;
-        m_isUnLocked = _isUnlocked;
-        m_isPassive = false;
-        m_specificPoint = _specificPoint;
-        m_isEnabled = false;
-    }
-
-    // 패시브 스킬
-    public SkillInfo(   SkillType _type,
-                        string _name,
-                        int _requiredLevel,
-                        string _descryption,
-                        bool _isUnlocked,    
-                        int _specificPoint  )
-    {
-        m_type = _type;
-        m_name = _name;
-        m_requiredLevel = _requiredLevel;
-        m_descryption = _descryption;
-        m_isUnLocked = _isUnlocked;
-        m_isPassive = true;
-        m_specificPoint = _specificPoint;
-    }
-
-    public void SetSkillInfo(SkillInfo info)
+    public void ConvertData(DataSkillInfo info)
     {
         m_type = info.m_type;
         m_name = info.m_name;
