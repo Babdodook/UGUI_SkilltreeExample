@@ -8,8 +8,9 @@
     "m_delayTime": 0.0,
     "m_requiredLevel": 1,
     "m_descryption": "불덩이를 날려 공격합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -20,8 +21,9 @@
     "m_delayTime": 6.0,
     "m_requiredLevel": 3,
     "m_descryption": "얼음 덩어리를 날려 공격합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -32,8 +34,9 @@
     "m_delayTime": 0.0,
     "m_requiredLevel": 10,
     "m_descryption": "보호막을 만들어 받는 피해를 감소시킵니다.",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -45,7 +48,8 @@
     "m_requiredLevel": 15,
     "m_descryption": "분노의 가득 찬 벼락을 쏘아 감전시킵니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 3
   },
   {
     "m_type": 1,
@@ -56,8 +60,9 @@
     "m_delayTime": 21.0,
     "m_requiredLevel": 20,
     "m_descryption": "발 밑에 마법진을 소환합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -68,8 +73,9 @@
     "m_delayTime": 28.0,
     "m_requiredLevel": 25,
     "m_descryption": "주변 대지를 얼어붙게 만듭니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -80,8 +86,9 @@
     "m_delayTime": 26.0,
     "m_requiredLevel": 30,
     "m_descryption": "불의 장벽을 소환해 적이 접근하지 못하게 합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -93,7 +100,8 @@
     "m_requiredLevel": 35,
     "m_descryption": "주변에 연쇄적으로 전이되는 번개를 쏩니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 4
   },
   {
     "m_type": 1,
@@ -104,8 +112,9 @@
     "m_delayTime": 13.0,
     "m_requiredLevel": 40,
     "m_descryption": "불의 비를 내리게 합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -116,8 +125,9 @@
     "m_delayTime": 40.0,
     "m_requiredLevel": 45,
     "m_descryption": "걸어 지나간 자리에 냉기 지역을 소환합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -128,8 +138,9 @@
     "m_delayTime": 28.0,
     "m_requiredLevel": 50,
     "m_descryption": "하늘의 별을 떨어트려 강력한 피해를 줍니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 1,
@@ -141,7 +152,8 @@
     "m_requiredLevel": 55,
     "m_descryption": "연속으로 벼락을 떨어트립니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 6
   },
   {
     "m_type": 1,
@@ -153,7 +165,8 @@
     "m_requiredLevel": 3,
     "m_descryption": "최대 활력 35% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 3
   },
   {
     "m_type": 1,
@@ -165,7 +178,8 @@
     "m_requiredLevel": 4,
     "m_descryption": "마법 능력 기술의 시전 시간 8% 감소",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 4
   },
   {
     "m_type": 1,
@@ -177,7 +191,8 @@
     "m_requiredLevel": 5,
     "m_descryption": "불 붙음, 얼음화, 감전 효과의 지속 시간 30%  증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 5
   },
   {
     "m_type": 1,
@@ -189,7 +204,8 @@
     "m_requiredLevel": 6,
     "m_descryption": "보호막, 차가운 발걸음, 마법진 사용 시 마력의 원천",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 6
   },
   {
     "m_type": 1,
@@ -201,7 +217,8 @@
     "m_requiredLevel": 7,
     "m_descryption": "마법 능력의 공격 기술 피해 10% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 7
   },
   {
     "m_type": 1,
@@ -213,6 +230,7 @@
     "m_requiredLevel": 8,
     "m_descryption": "마법 치명타 확률 6% 증가\n마법 능력의 시전 기술 피해 5% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 8
   }
 ]

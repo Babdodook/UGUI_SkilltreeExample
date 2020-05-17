@@ -8,12 +8,15 @@ public class SkillEventTrigger : MonoBehaviour
 {
     RectTransform SkillInfoTab;
     RectTransform SkillInfoTabPassive;
-    SkillInfo _SkillInfo;
+    [SerializeField] public SkillInfo _SkillInfo;
+    SkillTreeManager _SkillTreeManager;
+    PlayerStateInfo ExPlayer;
 
     void Start () {
         SkillInfoTab = GameObject.Find("SkillInfo").GetComponent<RectTransform>();
         SkillInfoTabPassive = GameObject.Find("SkillInfoPassive").GetComponent<RectTransform>();
         _SkillInfo = GetComponent<SkillInfo>();
+        _SkillTreeManager = GameObject.Find("SkillTreeManager").GetComponent<SkillTreeManager>();
 
         EventTrigger eventTrigger = gameObject.AddComponent<EventTrigger>();
 
@@ -35,13 +38,7 @@ public class SkillEventTrigger : MonoBehaviour
 	
     void OnPointerDown(PointerEventData data)
     {
-        if(!_SkillInfo.m_isPassive)
-        {
-            Color _color = GetComponent<Image>().color;
-            _color.a = 1;
-            GetComponent<Image>().color = _color;
-            _SkillInfo.m_isUnLocked = true;
-        }
+        _SkillTreeManager.ClickSkill(_SkillInfo,GetComponent<RectTransform>());
     }
 
     void OnPointerEnter(PointerEventData data)
@@ -49,21 +46,37 @@ public class SkillEventTrigger : MonoBehaviour
         Vector2 pos = GetComponent<RectTransform>().position;
         Vector2 size = GetComponent<RectTransform>().sizeDelta;
         Vector2 tabsize;
+        Vector2 tabPos = Vector2.zero;
 
         
         //정보창 위치 지정
         if(_SkillInfo.m_isPassive)
         {
             tabsize = SkillInfoTabPassive.sizeDelta;
-            SkillInfoTabPassive.position = new Vector2(pos.x + size.x/2 + tabsize.x/2 + 10, pos.y);
+            tabPos = new Vector2(pos.x + size.x/2 + tabsize.x/2 + 10, pos.y);
+
+            if(Camera.main.pixelWidth < pos.x + size.x/2 + tabsize.x + 10)
+                tabPos.x = pos.x - size.x/2 - tabsize.x/2 - 10;
+                
+            SkillInfoTabPassive.position = tabPos;
         }
         else
         {
             tabsize = SkillInfoTab.sizeDelta;
+
+            tabPos = new Vector2(pos.x + size.x/2 + tabsize.x/2 + 10, pos.y);
+
+            // height 넘어갈때 y좌표 보정
             if(Camera.main.pixelHeight < pos.y + tabsize.y/2)
-                SkillInfoTab.position = new Vector2(pos.x + size.x/2 + tabsize.x/2 + 10, Camera.main.pixelHeight - tabsize.y/2);
-            else
-                SkillInfoTab.position = new Vector2(pos.x + size.x/2 + tabsize.x/2 + 10, pos.y);
+                tabPos.y = Camera.main.pixelHeight - tabsize.y/2;
+            else if(0 > pos.y - tabsize.y/2)
+                tabPos.y = Camera.main.pixelHeight + tabsize.y/2;
+            
+            // width 넘어갈때 x좌표 보정
+            if(Camera.main.pixelWidth < pos.x + size.x/2 + tabsize.x + 10)
+                tabPos.x = pos.x - size.x/2 - tabsize.x/2 - 10;
+
+            SkillInfoTab.position = tabPos;
         }
 
         ShowInfo();
@@ -87,7 +100,7 @@ public class SkillEventTrigger : MonoBehaviour
             SkillInfoTabPassive.Find("Descryption").GetComponent<Text>().text = _SkillInfo.m_descryption;
             //요구레벨
             SkillInfoTabPassive.Find("RequiredLevel").GetComponent<Text>().text = 
-                "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 능력" + _SkillInfo.m_requiredLevel.ToString() + "레벨";
+                "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 강화 포인트 " + _SkillInfo.m_requiredLevel.ToString() + " 이상";
         }
         else
         {
@@ -115,7 +128,7 @@ public class SkillEventTrigger : MonoBehaviour
             SkillInfoTab.Find("Descryption").GetComponent<Text>().text = _SkillInfo.m_descryption;
             //요구레벨
             SkillInfoTab.Find("RequiredLevel").GetComponent<Text>().text = 
-                "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 능력" + _SkillInfo.m_requiredLevel.ToString() + " 레벨";
+                "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 능력 " + _SkillInfo.m_requiredLevel.ToString() + "레벨";
         }
     }
 }

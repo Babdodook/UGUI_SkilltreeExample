@@ -8,8 +8,9 @@
     "m_delayTime": 0.0,
     "m_requiredLevel": 1,
     "m_descryption": "연속으로 빠르게 베어 공격합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -20,8 +21,9 @@
     "m_delayTime": 9.0,
     "m_requiredLevel": 3,
     "m_descryption": "독의 기운을 품고 있다가 적에게 전이시킵니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -32,8 +34,9 @@
     "m_delayTime": 21.0,
     "m_requiredLevel": 10,
     "m_descryption": "무기를 내리꽂아 공격합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -45,7 +48,8 @@
     "m_requiredLevel": 15,
     "m_descryption": "순간적으로 몸을 뒤로 날립니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 3
   },
   {
     "m_type": 3,
@@ -56,8 +60,9 @@
     "m_delayTime": 18.0,
     "m_requiredLevel": 20,
     "m_descryption": "대상에게 도약하여 피해를 줍니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -68,8 +73,9 @@
     "m_delayTime": 27.0,
     "m_requiredLevel": 25,
     "m_descryption": "대상에게 표식을 남깁니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -80,8 +86,9 @@
     "m_delayTime": 12.0,
     "m_requiredLevel": 30,
     "m_descryption": "매우 빠른 속도로 적을 4회 난타합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -93,7 +100,8 @@
     "m_requiredLevel": 35,
     "m_descryption": "은신하여 적에 눈에 띄지 않습니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 4
   },
   {
     "m_type": 3,
@@ -104,8 +112,9 @@
     "m_delayTime": 90.0,
     "m_requiredLevel": 40,
     "m_descryption": "재빠르게 움직일 수 있습니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -116,8 +125,9 @@
     "m_delayTime": 24.0,
     "m_requiredLevel": 45,
     "m_descryption": "기습하여 강한 피해를 줍니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -128,8 +138,9 @@
     "m_delayTime": 45.0,
     "m_requiredLevel": 50,
     "m_descryption": "대상의 이로운 효과를 빼앗아옵니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 3,
@@ -141,7 +152,8 @@
     "m_requiredLevel": 55,
     "m_descryption": "숨겨둔 비수를 던집니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 6
   },
   {
     "m_type": 3,
@@ -153,7 +165,8 @@
     "m_requiredLevel": 3,
     "m_descryption": "공격 속도 40 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 3
   },
   {
     "m_type": 3,
@@ -165,7 +178,8 @@
     "m_requiredLevel": 4,
     "m_descryption": "회피 확률 5% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 4
   },
   {
     "m_type": 3,
@@ -177,7 +191,8 @@
     "m_requiredLevel": 5,
     "m_descryption": "모든 치명타 및 치유 극대화 성공 시 약점 간파",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 5
   },
   {
     "m_type": 3,
@@ -189,7 +204,8 @@
     "m_requiredLevel": 6,
     "m_descryption": "살기 누적 시 2회 누적",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 6
   },
   {
     "m_type": 3,
@@ -201,7 +217,8 @@
     "m_requiredLevel": 7,
     "m_descryption": "독, 출혈 효과 지속 시간 70% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 7
   },
   {
     "m_type": 3,
@@ -213,6 +230,7 @@
     "m_requiredLevel": 8,
     "m_descryption": "사명 기술의 재사용 대기 시간 20% 감소",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 8
   }
 ]

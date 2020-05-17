@@ -30,6 +30,8 @@ public class SkillInfo : MonoBehaviour
     [Header("스킬 설명")]   public string m_descryption;
     [Header("스킬 개방")]   public bool m_isUnLocked;
     [Header("지속 스킬")]   public bool m_isPassive;
+    [Header("특정 조건 개방 스킬")] public int m_specificPoint;
+    [Header("사용 중인 스킬")]  public bool m_isEnabled;
     
     public SkillInfo()
     {
@@ -41,6 +43,7 @@ public class SkillInfo : MonoBehaviour
         m_isUnLocked = false;
     }
 
+    // 액티브 스킬
     public SkillInfo(   SkillType _type,
                         string _name,
                         int _mana,
@@ -49,7 +52,8 @@ public class SkillInfo : MonoBehaviour
                         float _delayTime,
                         int _requiredLevel,
                         string _descryption,
-                        bool _isUnlocked    )
+                        bool _isUnlocked,  
+                        int _specificPoint  )
     {
         m_type = _type;
         m_name = _name;
@@ -61,13 +65,17 @@ public class SkillInfo : MonoBehaviour
         m_descryption = _descryption;
         m_isUnLocked = _isUnlocked;
         m_isPassive = false;
+        m_specificPoint = _specificPoint;
+        m_isEnabled = false;
     }
 
+    // 패시브 스킬
     public SkillInfo(   SkillType _type,
                         string _name,
                         int _requiredLevel,
                         string _descryption,
-                        bool _isUnlocked    )
+                        bool _isUnlocked,    
+                        int _specificPoint  )
     {
         m_type = _type;
         m_name = _name;
@@ -75,6 +83,7 @@ public class SkillInfo : MonoBehaviour
         m_descryption = _descryption;
         m_isUnLocked = _isUnlocked;
         m_isPassive = true;
+        m_specificPoint = _specificPoint;
     }
 
     public void SetSkillInfo(SkillInfo info)
@@ -89,6 +98,8 @@ public class SkillInfo : MonoBehaviour
         m_descryption = info.m_descryption;
         m_isUnLocked = info.m_isUnLocked;
         m_isPassive = info.m_isPassive;
+        m_specificPoint = info.m_specificPoint;
+        m_isEnabled = info.m_isEnabled;
     }
 
     public string GetTypeToString()

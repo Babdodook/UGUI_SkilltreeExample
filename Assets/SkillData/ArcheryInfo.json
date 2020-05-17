@@ -8,8 +8,9 @@
     "m_delayTime": 0.0,
     "m_requiredLevel": 1,
     "m_descryption": "연속으로 화살을 쏘아 공격합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -20,8 +21,9 @@
     "m_delayTime": 12.0,
     "m_requiredLevel": 3,
     "m_descryption": "강한 충격을 주는 화살을 발사합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -32,8 +34,9 @@
     "m_delayTime": 40.0,
     "m_requiredLevel": 10,
     "m_descryption": "정밀하게 조준 자세를 취해 큰 피해를 줍니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -45,7 +48,8 @@
     "m_requiredLevel": 15,
     "m_descryption": "방출 사격을 발사하여 적의 접근을 방지합니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 3
   },
   {
     "m_type": 2,
@@ -56,8 +60,9 @@
     "m_delayTime": 9.0,
     "m_requiredLevel": 20,
     "m_descryption": "눈부신 화살을 발사하여 적의 시야를 방해합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -68,8 +73,9 @@
     "m_delayTime": 24.0,
     "m_requiredLevel": 25,
     "m_descryption": "주변 적의 발을 묶습니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -80,8 +86,9 @@
     "m_delayTime": 80.0,
     "m_requiredLevel": 30,
     "m_descryption": "끊임없이 이동하며 공격할 준비를 합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -93,7 +100,8 @@
     "m_requiredLevel": 35,
     "m_descryption": "폭약이 장착된 화살을 발사합니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 4
   },
   {
     "m_type": 2,
@@ -104,8 +112,9 @@
     "m_delayTime": 60.0,
     "m_requiredLevel": 40,
     "m_descryption": "생존 본능이 발동되어 생존 확률이 증가합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -116,8 +125,9 @@
     "m_delayTime": 0.0,
     "m_requiredLevel": 45,
     "m_descryption": "뒤로 빠르게 이동하며 날카로운 공격을 할 수 있게 됩니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -128,8 +138,9 @@
     "m_delayTime": 22.0,
     "m_requiredLevel": 50,
     "m_descryption": "10발의 화살을 동시에 발사하여 적의 움직임을 견제합니다",
-    "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isUnLocked": true,
+    "m_isPassive": false,
+    "m_specificPoint": 0
   },
   {
     "m_type": 2,
@@ -141,7 +152,8 @@
     "m_requiredLevel": 55,
     "m_descryption": "먼 거리의 적을 저격하여 강력한 피해를 입힙니다",
     "m_isUnLocked": false,
-    "m_isPassive": false
+    "m_isPassive": false,
+    "m_specificPoint": 6
   },
   {
     "m_type": 2,
@@ -153,7 +165,8 @@
     "m_requiredLevel": 3,
     "m_descryption": "이동 속도 8% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 3
   },
   {
     "m_type": 2,
@@ -165,7 +178,8 @@
     "m_requiredLevel": 4,
     "m_descryption": "조준 사격, 이동 사격 유지 중 야성 기술의 활력 소모량 10% 감소",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 4
   },
   {
     "m_type": 2,
@@ -177,7 +191,8 @@
     "m_requiredLevel": 5,
     "m_descryption": "야성 원거리 공격 기술의 영점을 30m로 설정\n영점에 가까워 질수록 원거리 기술 피해 최대 30% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 5
   },
   {
     "m_type": 2,
@@ -189,7 +204,8 @@
     "m_requiredLevel": 6,
     "m_descryption": "야성 원거리 기술이 치명타로 명중할 때마다 야성의 증표 누적",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 6
   },
   {
     "m_type": 2,
@@ -201,7 +217,8 @@
     "m_requiredLevel": 7,
     "m_descryption": "야성 능력의 공격 기술 피해 10% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 7
   },
   {
     "m_type": 2,
@@ -213,6 +230,7 @@
     "m_requiredLevel": 8,
     "m_descryption": "원거리 치명타 확률 9% 증가",
     "m_isUnLocked": false,
-    "m_isPassive": true
+    "m_isPassive": true,
+    "m_specificPoint": 8
   }
 ]

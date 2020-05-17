@@ -14,9 +14,20 @@ public class SelectType
 
 public class SkillTreeManager : MonoBehaviour
 {
+    // 스킬 프로토타입
     public RectTransform SkillPrototype = null;
     Vector2 prototypePos;
 
+    // 플레이어 스탯
+    public PlayerStateInfo ExPlayer;
+    public Text MinSkillLevel;
+    public Text AvailableSkillPoint;
+    public Text UsedSkillPoint;
+    public bool isMaxPoint = false;
+
+    public Text[] CurrentSkillPointText = new Text[3];
+
+    // 버튼들
     public RectTransform[] SelectSkillSet = new RectTransform[3];
     public RectTransform[] SkillSet = new RectTransform[3];
     public RectTransform[] Reset = new RectTransform[3];
@@ -53,6 +64,11 @@ public class SkillTreeManager : MonoBehaviour
         prototypePos = SkillPrototype.GetComponent<RectTransform>().anchoredPosition;
 
         LoadData();
+    }
+
+    void Update()
+    {
+        UpdateSkillInfo();
     }
 
     // 스킬 리스트 초기화
@@ -153,8 +169,6 @@ public class SkillTreeManager : MonoBehaviour
                 SkillDataList = Witchcraft;
                 break;
         }
-
-        
 
         // 자식 오브젝트 SkillInfo 초기화하기
         for(int i=0 ; i< SkillDataList.Count ; i++)
@@ -307,5 +321,107 @@ public class SkillTreeManager : MonoBehaviour
         }
     }
 
-    
+    // 스킬포인트 업데이트
+    // 스킬포인트에 따라 스킬해금 업데이트
+    public void UpdateSkillInfo()
+    {
+        SkillInfo[] Skills;
+        ExPlayer.AvailableSkillPoint = ExPlayer.MaxSkillPoint;
+        ExPlayer.MinSkillLevel = 0;
+
+        for(int i=0 ; i < SkillSet.Length ; i++)
+        {
+            Skills = SkillSet[i].GetComponentsInChildren<SkillInfo>();
+            int CurrentSkillPoint=0;
+
+            for(int j=0 ; j < Skills.Length ; j++)
+            {
+                //액티브 스킬중에서 찍은 스킬 찾기 (패시브 제외)
+                if(!Skills[j].m_isPassive && Skills[j].m_isEnabled)
+                {
+                    ExPlayer.AvailableSkillPoint--;
+                    CurrentSkillPoint++;
+
+                    if(Skills[j].m_requiredLevel > ExPlayer.MinSkillLevel)
+                        ExPlayer.MinSkillLevel = Skills[j].m_requiredLevel;
+                }
+            }
+
+            // 특정 조건 만족하는 스킬 해금해주기
+            // 패시브 스킬은 자동으로 활성화 시켜주기
+            for(int z=0 ; z < Skills.Length ; z++)
+            {
+                if( Skills[z].m_specificPoint != 0 
+                    && Skills[z].m_specificPoint <= CurrentSkillPoint )
+                {
+                    Skills[z].m_isUnLocked = true;
+
+                    // 패시브 스킬일 경우 활성화
+                    if(Skills[z].m_isPassive)
+                    {
+                        print(Skills[z]);
+                        Color _color = Skills[z].GetComponent<Image>().color;
+                        _color.a = 1;
+                        Skills[z].GetComponent<Image>().color = _color;
+                        Skills[z].m_isEnabled = true;
+                    }
+                }
+            }
+
+            CurrentSkillPointText[i].text = "(" + CurrentSkillPoint + "/12)";
+        }
+
+        ExPlayer.UsedSkillPoint = ExPlayer.MaxSkillPoint - ExPlayer.AvailableSkillPoint;
+
+        MinSkillLevel.text = "최소 기술 레벨: " + ExPlayer.MinSkillLevel;
+        AvailableSkillPoint.text = "사용가능 기술 포인트: " + ExPlayer.AvailableSkillPoint;
+        UsedSkillPoint.text = "사용한 기술 포인트: " + ExPlayer.UsedSkillPoint;
+
+        // 사용 가능한 스킬포인트가 없다면?
+        // 더 이상 스킬 못찍도록 하기
+        if(ExPlayer.AvailableSkillPoint == 0)
+            isMaxPoint=true;
+        else
+            isMaxPoint=false;
+    }
+
+    void SetCurrentSkillSetsUnLock(RectTransform _transform)
+    {
+        int CurrentSkillPoint=0;
+
+        SkillInfo[] currentSkillSetInfo = 
+            _transform.GetComponentInParent<RectTransform>().GetComponentsInChildren<SkillInfo>();
+
+        // 해당 기술 스킬포인트 몇 사용하였는지 알아오기
+        for(int i=0 ; i < currentSkillSetInfo.Length ; i++)
+        {
+            if(currentSkillSetInfo[i].m_isEnabled)
+                CurrentSkillPoint++;
+        }
+
+        // 조건만족하는 스킬찾아서 해금해주기
+        for(int i=0 ; i < currentSkillSetInfo.Length ; i++)
+        {
+            if(currentSkillSetInfo[i].m_specificPoint != 0 &&
+            currentSkillSetInfo[i].m_specificPoint >= CurrentSkillPoint)
+                currentSkillSetInfo[i].m_isUnLocked = true;
+        }
+    }
+
+    public void ClickSkill(SkillInfo _SkillInfo, RectTransform _transform)
+    {
+        // 이미 활성화된 스킬이라면 다음 코드 실행하지 않기
+        // 잠긴 스킬스킬 또한 실행하지 않기
+        // 패시브 스킬도 실행하지 않기
+        if(_SkillInfo.m_isEnabled || isMaxPoint || !_SkillInfo.m_isUnLocked || _SkillInfo.m_isPassive )
+        {
+            return;
+        }
+
+        Color _color = _transform.GetComponent<Image>().color;
+        _color.a = 1;
+        _transform.GetComponent<Image>().color = _color;
+        _SkillInfo.m_isEnabled = true;
+    }
+
 }
