@@ -68,6 +68,7 @@ public class SkillTreeManager : MonoBehaviour
 
     public void SaveData()
     {
+        /*
         for(int i=0 ; i<SkillTabs.Length)
         {
             if(SkillTabs[i].SkillSet != null)
@@ -75,6 +76,7 @@ public class SkillTreeManager : MonoBehaviour
                 
             }
         }
+        */
         
 
         string Battlerage_data = JsonConvert.SerializeObject(Battlerage, Formatting.Indented);
