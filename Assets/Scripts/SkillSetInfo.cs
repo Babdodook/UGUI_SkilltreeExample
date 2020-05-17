@@ -14,7 +14,7 @@ public class SkillSetInfo : MonoBehaviour
     void Awake()
     {
         rectTransform = this.GetComponent<RectTransform>();
-        CurrentSkillList = new List<DataSkillInfo>();
+        CurrentSkillList = null;
         this.gameObject.SetActive(false);
     }
 
@@ -32,5 +32,37 @@ public class SkillSetInfo : MonoBehaviour
         }
 
         return CurrentSkillPoint;
+    }
+
+    public List<DataSkillInfo> ConvertDataToJson()
+    {
+        List<DataSkillInfo> newList = new List<DataSkillInfo>();
+        SkillInfo _skillInfo;
+
+        for(int i=0 ; i<Skills.Length ; i++)
+        {
+            _skillInfo = Skills[i].GetComponent<SkillInfo>();
+
+            CurrentSkillList[i].m_name = _skillInfo.m_name;
+            CurrentSkillList[i].m_mana = _skillInfo.m_mana;
+            CurrentSkillList[i].m_range = _skillInfo.m_range;
+            CurrentSkillList[i].m_castTime = _skillInfo.m_castTime;
+            CurrentSkillList[i].m_delayTime = _skillInfo.m_delayTime;
+            CurrentSkillList[i].m_descryption = _skillInfo.m_descryption;
+            CurrentSkillList[i].m_requiredLevel = _skillInfo.m_requiredLevel;
+            CurrentSkillList[i].m_specificPoint = _skillInfo.m_specificPoint;
+        }
+
+        return CurrentSkillList;
+    }
+
+    public SkillType GetCurrentSkillListType()
+    {
+        if(Skills != null)
+        {
+            return Skills[0].GetComponent<SkillInfo>().m_type;
+        }
+        else
+            return SkillType.Max;
     }
 }

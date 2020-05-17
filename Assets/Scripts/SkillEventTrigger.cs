@@ -100,7 +100,8 @@ public class SkillEventTrigger : MonoBehaviour
             SkillInfoTabPassive.Find("Descryption").GetComponent<Text>().text = _SkillInfo.m_descryption;
             //요구레벨
             SkillInfoTabPassive.Find("RequiredLevel").GetComponent<Text>().text = 
-                "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 강화 포인트 " + _SkillInfo.m_requiredLevel.ToString() + " 이상";
+                "<b><color=#ff0000>" + "배우기 요구 조건 " + "</color>" + "<color=#00ff00ff>" +"[" + _SkillInfo.GetTypeToString() + "] </color>" + 
+                "<color=#ff0000> 강화 포인트 </color>" + "<color=#00ff00ff>" + _SkillInfo.m_requiredLevel.ToString() + "</color> <color=#ff0000>이상" + "</color></b>";
         }
         else
         {
@@ -126,9 +127,19 @@ public class SkillEventTrigger : MonoBehaviour
             SkillInfoTab.Find("DelayTime").GetComponent<Text>().text = _SkillInfo.m_delayTime.ToString()+"초 후 재사용 가능";
             //설명
             SkillInfoTab.Find("Descryption").GetComponent<Text>().text = _SkillInfo.m_descryption;
+
             //요구레벨
-            SkillInfoTab.Find("RequiredLevel").GetComponent<Text>().text = 
-                "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 능력 " + _SkillInfo.m_requiredLevel.ToString() + "레벨";
+            if(_SkillInfo.m_specificPoint != 0)
+            {
+                SkillInfoTab.Find("RequiredLevel").GetComponent<Text>().text = 
+                    "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 능력 " + _SkillInfo.m_requiredLevel.ToString() + "레벨\n" +
+                    "<b><color=#ff0000>" + "강화 포인트 </color> <color=#00ff00ff>" + _SkillInfo.m_specificPoint + "</color> <color=#ff0000>이상" + "</color></b>";
+            }
+            else
+            {
+                SkillInfoTab.Find("RequiredLevel").GetComponent<Text>().text = 
+                    "배우기 요구 조건 " + "[" + _SkillInfo.GetTypeToString() + "] 능력 " + _SkillInfo.m_requiredLevel.ToString() + "레벨";
+            }
         }
     }
 }

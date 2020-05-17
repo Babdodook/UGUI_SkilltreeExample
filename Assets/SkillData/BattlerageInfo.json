@@ -10,7 +10,8 @@
     "m_descryption": "빠르게 적을 베어 공격하며 연속으로 사용 시 피해가 증가합니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -23,7 +24,8 @@
     "m_descryption": "순간적으로 적에게 돌격하여 공격합니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -36,7 +38,8 @@
     "m_descryption": "손목에 긴장을 풀어 손놀림이 가벼워 집니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -49,7 +52,8 @@
     "m_descryption": "빠르게 회전하여 적을 베며 연속으로 사용 시 점점 피해가 증가합니다",
     "m_isUnLocked": false,
     "m_isPassive": false,
-    "m_specificPoint": 3
+    "m_specificPoint": 3,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -62,7 +66,8 @@
     "m_descryption": "강력하게 땅을 내리쳐 대지를 가릅니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -75,7 +80,8 @@
     "m_descryption": "폭주 상태가 되어 몸을 사리지 않고 공격합니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -88,7 +94,8 @@
     "m_descryption": "무기를 강력하게 내려쳐 결정타를 노립니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -101,7 +108,8 @@
     "m_descryption": "순식간에 적에게 접근하여 폭풍처럼 빠르게 공격합니다",
     "m_isUnLocked": false,
     "m_isPassive": false,
-    "m_specificPoint": 4
+    "m_specificPoint": 4,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -114,7 +122,8 @@
     "m_descryption": "속박을 해제합니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -127,7 +136,8 @@
     "m_descryption": "포효하여 주변 적을 나약하게 만들고 시전자는 강인해집니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -140,7 +150,8 @@
     "m_descryption": "알모람의 망치를 던져 공격합니다",
     "m_isUnLocked": true,
     "m_isPassive": false,
-    "m_specificPoint": 0
+    "m_specificPoint": 0,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -153,7 +164,8 @@
     "m_descryption": "지정한 지역으로 도약하여 적진으로 파고듭니다",
     "m_isUnLocked": false,
     "m_isPassive": false,
-    "m_specificPoint": 6
+    "m_specificPoint": 6,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -166,7 +178,8 @@
     "m_descryption": "무기 막기 성공 시 격투 공격형 기술의 재사용 대기 시간 모두 초기화\n지정된 주기보다 빠르게 막고 반격이 발동되면 12초 동안 발동 억제",
     "m_isUnLocked": false,
     "m_isPassive": true,
-    "m_specificPoint": 3
+    "m_specificPoint": 3,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -179,7 +192,8 @@
     "m_descryption": "돌격, 폭풍 가르기, 적진으로 기술 사용 시 무모한 돌진\n지속시간: 4초\n 받는 물리 피해 15% 감소",
     "m_isUnLocked": false,
     "m_isPassive": true,
-    "m_specificPoint": 4
+    "m_specificPoint": 4,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -192,7 +206,8 @@
     "m_descryption": "근접 치명타 명중 시 물리관통",
     "m_isUnLocked": false,
     "m_isPassive": true,
-    "m_specificPoint": 5
+    "m_specificPoint": 5,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -205,7 +220,8 @@
     "m_descryption": "격투 피해량이 발생하는 기술 명중 시 광란",
     "m_isUnLocked": false,
     "m_isPassive": true,
-    "m_specificPoint": 6
+    "m_specificPoint": 6,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -218,7 +234,8 @@
     "m_descryption": "격투 능력의 공격 기술 피해량 10% 증가",
     "m_isUnLocked": false,
     "m_isPassive": true,
-    "m_specificPoint": 7
+    "m_specificPoint": 7,
+    "m_isEnabled": false
   },
   {
     "m_type": 0,
@@ -231,6 +248,7 @@
     "m_descryption": "근접 치명타 확률 6% 증가",
     "m_isUnLocked": false,
     "m_isPassive": true,
-    "m_specificPoint": 8
+    "m_specificPoint": 8,
+    "m_isEnabled": false
   }
 ]

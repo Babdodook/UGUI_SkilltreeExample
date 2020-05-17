@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class SkillInfo : MonoBehaviour
 {
-    [Header("스킬 타입")]
+    [HideInInspector]
     public SkillType m_type;
 
+    [Header("스킬 타입")]
+    public string type;
+
     [Header("스킬 정보")]
-    [Header("이름")]        public string m_name;
-    [Header("소모 활력")]   public int m_mana;
-    [Header("유효거리")]    public float m_range;
-    [Header("시전시간")]    public float m_castTime;
-    [Header("재사용 대기시간")]    public float m_delayTime;
-    [Header("요구 레벨")]   public int m_requiredLevel;
-    [Header("스킬 설명")]   public string m_descryption;
-    [Header("스킬 개방")]   public bool m_isUnLocked;
-    [Header("지속 스킬")]   public bool m_isPassive;
-    [Header("특정 조건 개방 스킬")] public int m_specificPoint;
-    [Header("사용 중인 스킬")]  public bool m_isEnabled;
+    [Header("스킬 이름")]           public string m_name;
+    [Header("소모 활력")]           public int m_mana;
+    [Header("유효거리(m)")]         public float m_range;
+    [Header("시전시간(초)")]        public float m_castTime;
+    [Header("재사용 대기시간(초)")] public float m_delayTime;
+    [Header("요구 레벨")]           public int m_requiredLevel;
+    [Header("스킬 설명")]           public string m_descryption;
+    [Header("스킬 개방")]           public bool m_isUnLocked;
+    [Header("지속 스킬")]           public bool m_isPassive;
+    [Header("강화 포인트")]         public int m_specificPoint;
+    [Header("활성화한 스킬")]       public bool m_isEnabled;
 
     public void ConvertData(DataSkillInfo info)
     {
@@ -53,6 +56,11 @@ public class SkillInfo : MonoBehaviour
         }
 
         return null;
+    }
+
+    void Awake()
+    {
+        type = GetTypeToString();
     }
 }
 

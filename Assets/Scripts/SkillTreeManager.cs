@@ -17,12 +17,14 @@ public class SkillTreeManager : MonoBehaviour
     Vector2 prototypePos;
 
     // 플레이어 스탯
+    [Header("수치 표시용")]
     public PlayerStateInfo ExPlayer;
     public Text MinSkillLevel;
     public Text AvailableSkillPoint;
     public Text UsedSkillPoint;
     public bool isMaxPoint = false;
 
+    [Header("스킬탭")]
     public SkillTabInfo[] SkillTabs = new SkillTabInfo[3];
     public Text[] CurrentSkillPointText = new Text[3];
     
@@ -54,6 +56,7 @@ public class SkillTreeManager : MonoBehaviour
     void Update()
     {
         UpdateSkillInfo();
+        //print(SkillTabs[0].SkillSet.CurrentSkillList);
     }
 
     // 스킬 리스트 초기화
@@ -68,28 +71,46 @@ public class SkillTreeManager : MonoBehaviour
 
     public void SaveData()
     {
-        /*
-        for(int i=0 ; i<SkillTabs.Length)
+        // 타입 알아오기
+        for(int i=0 ; i<SkillTabs.Length ; i++)
         {
-            if(SkillTabs[i].SkillSet != null)
+            if(SkillTabs[i].SkillSet.CurrentSkillList != null)
             {
-                
+                switch(SkillTabs[i].SkillSet.GetCurrentSkillListType())
+                {
+                    case SkillType.Battlerage:
+                        Battlerage = SkillTabs[i].SkillSet.ConvertDataToJson();
+                        break;
+                    case SkillType.Sorcery:
+                        Sorcery = SkillTabs[i].SkillSet.ConvertDataToJson();
+                        break;
+                    case SkillType.Archery:
+                        Archery = SkillTabs[i].SkillSet.ConvertDataToJson();
+                        break;
+                    case SkillType.Shadowplay:
+                        Shadowplay = SkillTabs[i].SkillSet.ConvertDataToJson();
+                        break;
+                    case SkillType.Witchcraft:
+                        Witchcraft = SkillTabs[i].SkillSet.ConvertDataToJson();
+                        break;
+                }
             }
         }
-        */
-        
 
+        // 저장
         string Battlerage_data = JsonConvert.SerializeObject(Battlerage, Formatting.Indented);
         string Sorcery_data = JsonConvert.SerializeObject(Sorcery, Formatting.Indented);
         string Archery_data = JsonConvert.SerializeObject(Archery, Formatting.Indented);
         string Shadowplay_data = JsonConvert.SerializeObject(Shadowplay, Formatting.Indented);
         string Witchcraft_data = JsonConvert.SerializeObject(Witchcraft, Formatting.Indented);
 
-        File.WriteAllText(Application.dataPath + "/SkillData/nBattlerageInfo.json", Battlerage_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/nSorceryInfo.json", Sorcery_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/nArcheryInfo.json", Archery_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/nShadowplayInfo.json", Shadowplay_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/nWitchcraftInfo.json", Witchcraft_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/BattlerageInfo.json", Battlerage_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/SorceryInfo.json", Sorcery_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/ArcheryInfo.json", Archery_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/ShadowplayInfo.json", Shadowplay_data);
+        File.WriteAllText(Application.dataPath + "/SkillData/WitchcraftInfo.json", Witchcraft_data);
+
+        print("저장 완료");
     }
 
     void LoadData()
@@ -206,6 +227,8 @@ public class SkillTreeManager : MonoBehaviour
             Destroy(_CurrentSkillSet.Skills[i].gameObject);
         }
 
+        _CurrentSkillSet.Skills = null;
+        _CurrentSkillSet.CurrentSkillList = null;
         _CurrentSkillSet.rectTransform.gameObject.SetActive(false);
     }
 
@@ -322,7 +345,7 @@ public class SkillTreeManager : MonoBehaviour
                     }
                 }
 
-                CurrentSkillPointText[i].text = "(" + CurrentSkillPoint + "/12)";
+                CurrentSkillPointText[i].text = "강화 포인트 (" + CurrentSkillPoint + "/12)";
             }
         }
 
