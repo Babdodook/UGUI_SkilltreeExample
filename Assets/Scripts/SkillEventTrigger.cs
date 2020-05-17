@@ -39,6 +39,7 @@ public class SkillEventTrigger : MonoBehaviour
     void OnPointerDown(PointerEventData data)
     {
         _SkillTreeManager.ClickSkill(_SkillInfo,GetComponent<RectTransform>());
+        SkillEditor.instance.GetData(GetComponent<RectTransform>());
     }
 
     void OnPointerEnter(PointerEventData data)

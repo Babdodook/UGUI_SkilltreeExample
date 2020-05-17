@@ -39,6 +39,18 @@ public class SkillInfo : MonoBehaviour
         m_isEnabled = info.m_isEnabled;
     }
 
+    public void SetData()
+    {
+        m_name = SkillEditor.instance.m_name;
+        m_mana = SkillEditor.instance.m_mana;
+        m_range = SkillEditor.instance.m_range;
+        m_castTime = SkillEditor.instance.m_castTime;
+        m_delayTime = SkillEditor.instance.m_delayTime;
+        m_requiredLevel = SkillEditor.instance.m_requiredLevel;
+        m_descryption = SkillEditor.instance.m_descryption;
+        m_specificPoint = SkillEditor.instance.m_specificPoint;
+    }
+
     public string GetTypeToString()
     {
         switch(m_type)

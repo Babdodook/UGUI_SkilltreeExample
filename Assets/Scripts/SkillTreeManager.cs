@@ -12,6 +12,8 @@ public class SelectType
 
 public class SkillTreeManager : MonoBehaviour
 {
+    public static SkillTreeManager instance;
+
     // 스킬 프로토타입
     public RectTransform SkillPrototype = null;
     Vector2 prototypePos;
@@ -31,6 +33,7 @@ public class SkillTreeManager : MonoBehaviour
     SelectType[] _selectType = new SelectType[5];
 
     //데이터 세이브&로드용 리스트
+    List<DataSkillInfo>[] DataListArray;
     List<DataSkillInfo> Battlerage;
     List<DataSkillInfo> Sorcery;
     List<DataSkillInfo> Archery;
@@ -39,6 +42,8 @@ public class SkillTreeManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+        
         InitializeSkillList();
 
         for(int i = 0 ; i <_selectType.Length ; i++)
@@ -56,7 +61,6 @@ public class SkillTreeManager : MonoBehaviour
     void Update()
     {
         UpdateSkillInfo();
-        //print(SkillTabs[0].SkillSet.CurrentSkillList);
     }
 
     // 스킬 리스트 초기화
@@ -104,22 +108,22 @@ public class SkillTreeManager : MonoBehaviour
         string Shadowplay_data = JsonConvert.SerializeObject(Shadowplay, Formatting.Indented);
         string Witchcraft_data = JsonConvert.SerializeObject(Witchcraft, Formatting.Indented);
 
-        File.WriteAllText(Application.dataPath + "/SkillData/BattlerageInfo.json", Battlerage_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/SorceryInfo.json", Sorcery_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/ArcheryInfo.json", Archery_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/ShadowplayInfo.json", Shadowplay_data);
-        File.WriteAllText(Application.dataPath + "/SkillData/WitchcraftInfo.json", Witchcraft_data);
+        File.WriteAllText(Application.streamingAssetsPath + "/BattlerageInfo.json", Battlerage_data);
+        File.WriteAllText(Application.streamingAssetsPath + "/SorceryInfo.json", Sorcery_data);
+        File.WriteAllText(Application.streamingAssetsPath + "/ArcheryInfo.json", Archery_data);
+        File.WriteAllText(Application.streamingAssetsPath + "/ShadowplayInfo.json", Shadowplay_data);
+        File.WriteAllText(Application.streamingAssetsPath + "/WitchcraftInfo.json", Witchcraft_data);
 
         print("저장 완료");
     }
 
     void LoadData()
     {
-        string Battlerage_data = File.ReadAllText(Application.dataPath + "/SkillData/BattlerageInfo.json");
-        string Sorcery_data = File.ReadAllText(Application.dataPath + "/SkillData/SorceryInfo.json");
-        string Archery_data = File.ReadAllText(Application.dataPath + "/SkillData/ArcheryInfo.json");
-        string Shadowplay_data = File.ReadAllText(Application.dataPath + "/SkillData/ShadowplayInfo.json");
-        string Witchcraft_data = File.ReadAllText(Application.dataPath + "/SkillData/WitchcraftInfo.json");
+        string Battlerage_data = File.ReadAllText(Application.streamingAssetsPath + "/BattlerageInfo.json");
+        string Sorcery_data = File.ReadAllText(Application.streamingAssetsPath + "/SorceryInfo.json");
+        string Archery_data = File.ReadAllText(Application.streamingAssetsPath + "/ArcheryInfo.json");
+        string Shadowplay_data = File.ReadAllText(Application.streamingAssetsPath + "/ShadowplayInfo.json");
+        string Witchcraft_data = File.ReadAllText(Application.streamingAssetsPath + "/WitchcraftInfo.json");
 
         Battlerage = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Battlerage_data);
         Sorcery = JsonConvert.DeserializeObject<List<DataSkillInfo>>(Sorcery_data);

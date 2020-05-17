@@ -46,8 +46,10 @@ public class ButtonEventManager : MonoBehaviour
         _SkillTreeManager.ClickChangeSkillSet(this.GetComponent<RectTransform>());
     }
 
+    /*
     public void SaveData()
     {
         _SkillTreeManager.SaveData();
     }
+    */
 }
