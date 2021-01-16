@@ -1,6 +1,6 @@
 # 아키에이지 스킬트리 시스템
 
-아키에이지의 스킬트리를 모작하여 구현하였습니다.  
+아키에이지의 스킬트리를 약식으로 구현하였습니다.  
 스킬 포인트의 분배, 스킬 초기화, 다른 능력 선택 등이 가능합니다.  
 능력은 총 5개가 구현되어 있습니다.  
 
@@ -49,6 +49,17 @@
 ![스킬정보1](https://user-images.githubusercontent.com/48229283/104790751-7ce88680-57db-11eb-935b-17b268e91679.png) | ![스킬정보2](https://user-images.githubusercontent.com/48229283/104790755-7eb24a00-57db-11eb-9a86-23a3cf64c5d3.png)
 
 마우스 커서를 올리면 해당 스킬의 정보를 열람할 수 있습니다.
+
+## 5. 에디터 편집
+
+이미지1 | 이미지2 | 이미지3
+:-------------------------:|:-------------------------:|:-------------------------:
+![스킬에디터1](https://user-images.githubusercontent.com/48229283/104796286-33f2fb00-57f8-11eb-9f8d-27b9bbe3c41a.PNG) | ![스킬에디터3](https://user-images.githubusercontent.com/48229283/104796273-20479480-57f8-11eb-9ecb-a2a51083f7b0.png) | ![스킬에디터4](https://user-images.githubusercontent.com/48229283/104796292-37868200-57f8-11eb-8ae2-aa84aa8df71c.PNG)
+
+엔진의 인스펙터창에서 스킬을 선택 후 스킬 정보를 편집할 수 있습니다.  
+변경된 정보는 저장버튼을 눌러서 데이터를 보존할 수 있습니다.  
+  
+해당 기능은 엔진을 잘 다루지 못하는 사람도 손쉬운 스킬 정보 변경을 위해 추가하였습니다.
 
 # 시스템 구조
 ![구조1](https://user-images.githubusercontent.com/48229283/104789265-d64eb680-57d7-11eb-9aec-72e012a26d4d.PNG)  
@@ -398,4 +409,144 @@ public class SkillInfo : MonoBehaviour
     }
 }
 
+```
+  
+## SimpleEditorInspector.cs
+  
+인스펙터창에서 스킬을 편집하기 위한 GUI 커스텀 에디터 클래스입니다.
+
+```cs
+[CustomEditor(typeof(SkillEditor))]
+
+public class SkillEditorInspector : Editor
+{
+    SkillEditor _editor;
+
+    void OnEnable()
+    {
+        // target은 위의 CustomEditor() 애트리뷰트에서 설정해 준 타입의 객체에 대한 레퍼런스
+        // object형이므로 실제 사용할 타입으로 캐스팅 해 준다.
+        _editor = target as SkillEditor;
+    }
+
+    public override void OnInspectorGUI()  //Editor상속, 커스텀에디터 구현 함수 재 정의.  
+    {
+        //base.OnInspectorGUI();
+
+        EditorGUI.BeginChangeCheck ();
+
+        GUILayout.Label("현재 선택한 오브젝트 데이터 설정");
+        EditorGUILayout.Space();
+        var m_name = EditorGUILayout.TextField("스킬 이름", _editor.m_name);
+        EditorGUILayout.Space();
+        var m_mana = EditorGUILayout.IntSlider ("활력 수치", _editor.m_mana, 0, 500);
+        EditorGUILayout.Space();
+        var m_range = EditorGUILayout.Slider ("유효 거리(m)", _editor.m_range, 0, 500);
+        EditorGUILayout.Space();
+        var m_castTime = EditorGUILayout.Slider ("시전시간(초)", _editor.m_castTime, 0, 30);
+        EditorGUILayout.Space();
+        var m_delayTime = EditorGUILayout.Slider ("재사용 대기시간(초)", _editor.m_delayTime, 0, 300);
+        EditorGUILayout.Space();
+        var m_requiredLevel = EditorGUILayout.IntSlider ("요구 레벨", _editor.m_requiredLevel, 0, 55);
+        EditorGUILayout.Space();
+        var m_specificPoint = EditorGUILayout.IntSlider ("강화 포인트", _editor.m_specificPoint, 0, 8);
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("스킬 설명");
+        var m_descryption = EditorGUILayout.TextArea(_editor.m_descryption, GUILayout.Height(50));
+        
+        if (EditorGUI.EndChangeCheck ()) {
+
+            //변경전에 Undo 에 등록
+            Undo.RecordObject (_editor, "Undo Action");
+
+            _editor.m_name = m_name;
+            _editor.m_mana = m_mana;
+            _editor.m_range = m_range;
+            _editor.m_castTime = m_castTime;
+            _editor.m_delayTime = m_delayTime;
+            _editor.m_requiredLevel = m_requiredLevel;
+            _editor.m_specificPoint = m_specificPoint;
+            _editor.m_descryption = m_descryption;
+        }
+
+        EditorGUILayout.Space();
+        GUILayout.Label("변경된 내용을 적용합니다");
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+
+        if (GUILayout.Button("적용", GUILayout.Width(200), GUILayout.Height(30))) 
+        {
+            _editor.ApllyData();
+        }
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space();
+        GUILayout.Label("로컬파일로 데이터를 저장합니다");
+        GUILayout.Label("(다음 실행때 저장한 데이터를 불러옵니다)");
+        EditorGUILayout.BeginHorizontal();  
+        GUILayout.FlexibleSpace(); 
+
+        if (GUILayout.Button("저장(to Json)", GUILayout.Width(200), GUILayout.Height(30))) 
+        {
+            // 적용하고 저장
+            _editor.ApllyData();
+            SkillTreeManager.instance.SaveData();
+        }
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+
+        if (GUI.changed)    //변경이 있을 시 적용된다. 이 코드가 없으면 인스펙터 창에서 변화는 있지만 적용은 되지 않는다.
+            EditorUtility.SetDirty(target);
+    }
+}
+```
+  
+## SkillEditor.cs
+  
+인스펙터에 표시되는 스킬의 정보를 표시해줍니다.
+스킬의 정보를 변경하는 기능도 수행합니다.
+  
+```cs
+public class SkillEditor : MonoBehaviour
+{
+    public static SkillEditor instance;
+
+    [Header("스킬 정보")]
+    [Header("스킬 이름")]           public string m_name;
+    [Header("소모 활력")]           public int m_mana;
+    [Header("유효거리(m)")]         public float m_range;
+    [Header("시전시간(초)")]        public float m_castTime;
+    [Header("재사용 대기시간(초)")] public float m_delayTime;
+    [Header("요구 레벨")]           public int m_requiredLevel;
+    [Header("스킬 설명")]           public string m_descryption;
+    [Header("강화 포인트")]         public int m_specificPoint;
+
+    public RectTransform currentSkill = null;
+
+    void Awake ()
+    {
+        instance = this;
+    }
+
+    public void GetData(RectTransform _currentSkill)
+    {
+        currentSkill = _currentSkill;
+        SkillInfo _skillInfo = currentSkill.GetComponent<SkillInfo>();
+
+        m_name = _skillInfo.m_name;
+        m_mana = _skillInfo.m_mana;
+        m_range = _skillInfo.m_range;
+        m_castTime = _skillInfo.m_castTime;
+        m_delayTime = _skillInfo.m_delayTime;
+        m_requiredLevel = _skillInfo.m_requiredLevel;
+        m_descryption = _skillInfo.m_descryption;
+        m_specificPoint = _skillInfo.m_specificPoint;
+    }
+
+    public void ApllyData()
+    {
+        currentSkill.GetComponent<SkillInfo>().SetData();
+    }
+}
 ```
